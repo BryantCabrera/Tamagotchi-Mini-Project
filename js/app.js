@@ -21,42 +21,61 @@ const $hunger = $('#hunger');
 const $sleepiness = $('#sleepiness');
 const $boredom = $('#boredom');
 const $age = $('#age');
-const $stats = $('#stats');
+const $stats = $('#status');
 const $feed = $('#food');
 const $play = $('#play');
 const $lights = $('#lights');
-
-/*----- event listeners -----*/ 
-$("#tamagotchi-screen").html(
-  `<img src="${babytchi.img}" alt="Babytchi" title="Babytchi" id="sprite">`
-);
-
-$('#stats').on('click', displayStats);
 
 /*----- functions -----*/
 // init () {
 
 // };
+const game = {
+    init () {
+        
+    },
+    render() {
+        $name.text(`${babytchi.name}'s Stats`);
+        $hunger.text(`Hunger: ${babytchi.hunger}/10`);
+        $sleepiness.text(`Sleepiness: ${babytchi.sleepiness}/10`);
+        $boredom.text(`Boredom: ${babytchi.boredom}/10`);
+        $age.text(`Age: ${babytchi.age}`);
+    },
+    feed() {
+        babytchi.hunger -= 2;
+    },
+    play() {
+        babytchi.boredom -= 2;
+    },
+    lights () {
+        babytchi.sleepiness = 0;
+    },
+    displayStats() {
+        if ($('#metrics').css('visibility') === 'visible') {
+            
+        } else if ($("#metrics").css("visibility") === 'hidden') {
+            $("#metrics").css("visibility", "visible");
+        }    
+    }
+}
 
-const render = function () {
-    $name.text(`${babytchi.name}'s Stats`);
-    $hunger.text(`Hunger: ${babytchi.hunger}/10`);
-    $sleepiness.text(`Sleepiness: ${babytchi.sleepiness}/10`);
-    $boredom.text(`Boredom: ${babytchi.boredom}/10`);
-    $age.text(`Age: ${babytchi.age}`);
-};
-render();
-
-// const displayStats = function () {
-//     $name.text(`${babytchi.name}'s Stats`);
-//     $hunger.text(`Hunger: ${babytchi.hunger}/10`);
-//     $sleepiness.text(`Sleepiness: ${babytchi.sleepiness}/10`);
-//     $boredom.text(`Boredom: ${babytchi.boredom}/10`);
-//     $age.text(`Age: ${babytchi.age}`);
-// };
+game.render();
 
 
+/*----- event listeners -----*/
+$("#tamagotchi-screen").html(
+    `<img src="${babytchi.img}" alt="Babytchi" title="Babytchi" id="sprite">`
+);
 
+// $('#icons').on('click', function (evt) {
+//     console.log(evt.target);
+//     if ($(evt.target) === )
+// });
+
+$status.on('click', game.displayStats);
+$food.on('click', game.feed);
+$play.on('click', game.play);
+$lights.on('click', game.lights);
 
 
 
