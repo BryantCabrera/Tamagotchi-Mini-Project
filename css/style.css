@@ -1,0 +1,34 @@
+:root {
+    --background-color1: rgba(207, 227, 244, .7);
+    --background-color2: rgba(220, 235, 244, .7);
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tamagotchi-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+    width: 10rem;
+    background-image: linear-gradient(to right bottom, var(--background-color1), var(--background-color2));
+}
+
+#sprite {
+
+}

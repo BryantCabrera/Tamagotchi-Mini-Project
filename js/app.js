@@ -9,5 +9,7 @@ class Tamagotchi {
     }
 }
 
-const babytchi = new Tamagotchi('babytchi', 'babytchi.gif');
+const babytchi = new Tamagotchi('babytchi', 'resources/imgs/babytchi.gif');
 console.log(babytchi);
+
+$('#tamagotchi-screen').html(`<img src="${babytchi.img}" alt="Babytchi" title="Babytchi" id="sprite">`);
