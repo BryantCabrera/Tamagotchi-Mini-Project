@@ -1,6 +1,10 @@
 :root {
     --background-color1: rgba(207, 227, 244, .7);
     --background-color2: rgba(220, 235, 244, .7);
+    --background-color3: rgba(255, 255, 255, .7);
+    --device-color1: rgba(159, 90, 253, 1);
+    --device-color2: rgba(154, 18, 179, 1);
+    --black: rbga(0, 0, 0);
 }
 
 * {
@@ -20,15 +24,62 @@ main {
     align-items: center;
 }
 
+#tamagotchi-device {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 30rem;
+    width: 30rem;
+    content: "";
+    background-image: radial-gradient(var(--device-color1), var(--device-color2));
+    -webkit-clip-path: ellipse(40% 50% at 50% 50%);
+    clip-path: ellipse(40% 50% at 50% 50%);
+}
+
 #tamagotchi-screen {
+    position: absolute;
+    top: 18%;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 14rem;
+    width: 14rem;
+    background-image: linear-gradient(to right bottom, var(--background-color3) 60%, var(--background-color1));
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .5);
+}
+
+#icons {
+    position: absolute;
+    bottom: 18%;
+}
+
+ion-icon {
+    width: 3rem;
+}
+
+/* #status,
+#food,
+#play,
+#lights {
     height: 10rem;
-    width: 10rem;
-    background-image: linear-gradient(to right bottom, var(--background-color1), var(--background-color2));
+} */
+
+#metrics {
+    font-size: 1.5rem;
+    color: rgba(0, 0, 0, .9);
 }
 
 #sprite {
 
+}
+
+#buttons {
+    display: grid;
+    grid-template-columns: 3 1fr;
+    grid-template-rows: 1 1fr;
+}
+
+.buttons__radio-group {
+    display: grid;
+    grid-template-rows: 2 1fr;
 }
