@@ -25,23 +25,19 @@ class Tamagotchi {
 }
 
 const renderLookup = {
-    // 'babytchi': '<img src="resources/imgs/babytchi.gif" alt="Babytchi" title="Babytchi" id="sprite">',
-    // 'marutchi': '<img src="resources/imgs/marutchi.gif" alt="Marutchi" title="Marutchi" id="sprite">',
-    // 'tamatchi': '<img src="resources/imgs/tamatchi.gif" alt="Tamatchi" title="Tamatchi" id="sprite">',
-    // 'mametchi': '<img src="resources/imgs/mametchi.gif" alt="Mametchi" title="Mametchi" id="sprite">'
     'babytchi': 'resources/imgs/babytchi.gif',
     'marutchi': 'resources/imgs/marutchi.gif',
     'tamatchi': 'resources/imgs/tamatchi.gif',
-    'mametchi': 'resources/imgs/mametchi.gif'
+    'mametchi': 'resources/imgs/mametchi.gif',
+    'dead': 'resources/imgs/dead3.png'
 };
 
 let newTamagotchi, interval;
 
-// const babytchi = new Tamagotchi("babytchi", "resources/imgs/babytchi.gif");
-// console.log(babytchi);
 
 /*----- app's state (variables) -----*/
 let time = 0; 
+
 
 /*----- cached element references -----*/ 
 const $name = $('#name');
@@ -55,10 +51,8 @@ const $play = $('#play');
 const $lights = $('#lights');
 const $time = $('#time');
 
-/*----- functions -----*/
-// init () {
 
-// };
+/*----- functions -----*/
 const game = {
     init () {
         const newName = prompt('What would you like to name your Tamagotchi?');
@@ -70,10 +64,6 @@ const game = {
 
         game.timer();
         game.render();
-
-        // function getRandomBetween(min, max) {
-        //     return Math.floor(Math.random()*(max-min) + min)
-        // }
     },
     timer () {
         interval = window.setInterval(function () {
@@ -91,31 +81,40 @@ const game = {
         }, 1000);
     },
     render() {
-        $("#tamagotchi-screen").html(`<img src="${renderLookup[newTamagotchi.stage]}" alt="${newTamagotchi.stage} image" title="${newTamagotchi.stage} image">`);
+        //Change stages/form
+        if (newTamagotchi.age === 1) {
+            newTamagotchi.stage = "marutchi";
+        } else if (newTamagotchi.age === 2) {
+            newTamagotchi.stage = "tamatchi";
+        } else if (newTamagotchi.age === 3) {
+            newTamagotchi.stage = "mametchi";
+        } else if (newTamagotchi.age === 4) {
+            game.death();
+        }
+
         $name.text(`${newTamagotchi.name}'s Stats`);
         $hunger.text(`Hunger: ${newTamagotchi.hunger}/10`);
         $sleepiness.text(`Sleepiness: ${newTamagotchi.sleepiness}/10`);
         $boredom.text(`Boredom: ${newTamagotchi.boredom}/10`);
         $age.text(`Age: ${newTamagotchi.age}`);
 
-        //Change stages/form
-        if (newTamagotchi.age === 1) {
-          newTamagotchi.stage = "marutchi";
-        } else if (newTamagotchi.age === 2) {
-          newTamagotchi.stage = "tamatchi";
-        } else if (newTamagotchi.age === 1) {
-          newTamagotchi.stage = "mametchi";
+        //checks death
+        for (let trait in newTamagotchi.tickChart) {
+          if (newTamagotchi[trait] >= 10) {
+            game.death();
+          }
         }
+
+        $("#tamagotchi-screen").html(`<img src="${renderLookup[newTamagotchi.stage]}" alt="${newTamagotchi.stage} image" title="${newTamagotchi.stage} image">`);
     },
-    feed() {
+    feed () {
         if (newTamagotchi.hunger >= 2) {
             newTamagotchi.hunger -= 2;
         } else {
             newTamagotchi.hunger = 0;
         }
-        
     },
-    play() {
+    play () {
         if (newTamagotchi.boredom >= 3) {
             newTamagotchi.boredom -= 3;
         } else {
@@ -125,12 +124,17 @@ const game = {
     lights () {
         newTamagotchi.sleepiness = 0;
     },
-    displayStats() {
+    displayStats () {
         if ($('#metrics').css('visibility') === 'visible') {
             $("#metrics").css("visibility", "hidden");
         } else if ($("#metrics").css("visibility") === 'hidden') {
             $("#metrics").css("visibility", "visible");
         }    
+    },
+    death () {
+        clearInterval(interval);
+        newTamagotchi.stage = "dead";
+        $age.text(`YOUR TAMAGOTCHI HAS DIED!`);
     }
 }
 
@@ -140,14 +144,6 @@ const getRandomBetween = function (min, max) {
 
 
 /*----- event listeners -----*/
-// $("#tamagotchi-screen").html(
-//   `<img src="${babytchi.img}" alt="Babytchi" title="Babytchi" id="sprite">`
-// );
-// $('#icons').on('click', function (evt) {
-//     console.log(evt.target);
-//     if ($(evt.target) === )
-// });
-
 $('#start-btn').on('click', game.init);
 
 $status.on('click', game.displayStats);
