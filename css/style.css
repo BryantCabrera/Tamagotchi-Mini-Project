@@ -4,8 +4,9 @@
     --background-color3: rgba(255, 255, 255, .7);
     --device-color1: rgba(159, 90, 253, 1);
     --device-color2: rgba(154, 18, 179, 1);
-    --button-color1: rgba(255, 192, 203 , .8);
-    --button-color2: rgb(179, 126, 135, .8);
+    --button-color1: rgba(255, 192, 203, .8);
+    --button-color2: rgba(179, 126, 135, .8);
+    --text-color1: #DF007A;
     --black: rbga(0, 0, 0);
 }
 
@@ -20,10 +21,41 @@ html {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(var(--button-color2), var(--button-color1));
+}
+
+header img {
+    height: 5rem;
+    width: auto;
+}
+
+header h1 {
+    color: var(--text-color1);
+}
+
+header ul a {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.4rem;
+    margin-right: .5rem;
+    color: var(--text-color1);
+}
+
+header ul a:hover {
+    border-bottom: 1px solid var(--text-color1);
+}
+
 main {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: linear-gradient(to bottom, rgba(255, 192, 203, .9), rgba(179, 126, 135, .9)), url(../resources/imgs/background.jpg);
+    background-size: cover;
+    height: 100vh;
 }
 
 #tamagotchi-device {
@@ -32,10 +64,11 @@ main {
     position: relative;
     height: 30rem;
     width: 30rem;
-    content: "";
-    background-image: radial-gradient(var(--device-color1) 50%, var(--device-color2));
+    background-image: radial-gradient(var(--device-color1) 40%, var(--device-color2)), url(../resources/imgs/device_background.jpg);
+    overflow: hidden;
     -webkit-clip-path: ellipse(40% 50% at 50% 50%);
     clip-path: ellipse(40% 50% at 50% 50%);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .9);
 }
 
 #tamagotchi-screen {
@@ -46,6 +79,7 @@ main {
     align-items: center;
     height: 14rem;
     width: 14rem;
+    border-radius: .4rem;
     background-image: linear-gradient(to bottom, var(--background-color3) 60%, var(--background-color1));
     box-shadow: inset 0 1rem 2rem rgba(0, 0, 0, .5);
 }
