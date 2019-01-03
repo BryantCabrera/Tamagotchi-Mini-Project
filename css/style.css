@@ -4,6 +4,8 @@
     --background-color3: rgba(255, 255, 255, .7);
     --device-color1: rgba(159, 90, 253, 1);
     --device-color2: rgba(154, 18, 179, 1);
+    --button-color1: rgba(255, 192, 203 , .8);
+    --button-color2: rgb(179, 126, 135, .8);
     --black: rbga(0, 0, 0);
 }
 
@@ -50,7 +52,7 @@ main {
 
 #icons {
     position: absolute;
-    bottom: 18%;
+    top: 20%;
 }
 
 ion-icon {
@@ -63,6 +65,25 @@ ion-icon {
 #lights {
     height: 10rem;
 } */
+
+a {
+    text-decoration: none;
+}
+
+#start {
+    display: flex;
+    justify-content: center;
+}
+
+#start-btn {
+    position: absolute;
+    bottom: 20%;
+    border: .2rem solid rgba(0, 0, 0);
+    border-radius: .3rem;
+    padding: .5rem;
+    color: rgba(255, 255, 255);
+    background-image: linear-gradient(to right bottom, var(--button-color1), var(--button-color2));
+}
 
 #metrics {
     visibility: visible;
