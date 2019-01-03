@@ -89,12 +89,21 @@ const game = {
         }, 1000);
     },
     render() {
-        $("#tamagotchi-screen").html(`<img src="${newTamagotchi.img}" alt="${newTamagotchi.stage} image" title="${newTamagotchi.stage} image">`);
+        $("#tamagotchi-screen").html(`<img src="${renderLookup[newTamagotchi.stage]}" alt="${newTamagotchi.stage} image" title="${newTamagotchi.stage} image">`);
         $name.text(`${newTamagotchi.name}'s Stats`);
         $hunger.text(`Hunger: ${newTamagotchi.hunger}/10`);
         $sleepiness.text(`Sleepiness: ${newTamagotchi.sleepiness}/10`);
         $boredom.text(`Boredom: ${newTamagotchi.boredom}/10`);
         $age.text(`Age: ${newTamagotchi.age}`);
+
+        //Change stages/form
+        if (newTamagotchi.age === 1) {
+          newTamagotchi.stage = "marutchi";
+        } else if (newTamagotchi.age === 2) {
+          newTamagotchi.stage = "tamatchi";
+        } else if (newTamagotchi.age === 1) {
+          newTamagotchi.stage = "mametchi";
+        }
     },
     feed() {
         newTamagotchi.hunger -= 2;
