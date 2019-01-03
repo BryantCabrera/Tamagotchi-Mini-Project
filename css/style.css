@@ -33,7 +33,7 @@ main {
     height: 30rem;
     width: 30rem;
     content: "";
-    background-image: radial-gradient(var(--device-color1), var(--device-color2));
+    background-image: radial-gradient(var(--device-color1) 50%, var(--device-color2));
     -webkit-clip-path: ellipse(40% 50% at 50% 50%);
     clip-path: ellipse(40% 50% at 50% 50%);
 }
@@ -46,8 +46,15 @@ main {
     align-items: center;
     height: 14rem;
     width: 14rem;
-    background-image: linear-gradient(to right bottom, var(--background-color3) 60%, var(--background-color1));
+    background-image: linear-gradient(to bottom, var(--background-color3) 60%, var(--background-color1));
     box-shadow: inset 0 1rem 2rem rgba(0, 0, 0, .5);
+}
+
+#tamagotchi-screen img {
+    position: absolute;
+    top: 7rem;
+    height: 6rem;
+    width: auto;
 }
 
 #icons {

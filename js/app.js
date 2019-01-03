@@ -1,8 +1,7 @@
 /*----- constants -----*/ 
 class Tamagotchi {
-  constructor(name, img) {
+  constructor(name) {
     this.name = name;
-    this.img = img;
     this.hunger = 0;
     this.sleepiness = 0;
     this.boredom = 0;
@@ -19,7 +18,7 @@ class Tamagotchi {
             threshold: getRandomBetween(3, 5)
         },
         age: {
-            threshold: getRandomBetween(29, 30)
+            threshold: 30
         }
     }
   }
@@ -36,7 +35,7 @@ const renderLookup = {
     'mametchi': 'resources/imgs/mametchi.gif'
 };
 
-let newTamagotchi;
+let newTamagotchi, interval;
 
 // const babytchi = new Tamagotchi("babytchi", "resources/imgs/babytchi.gif");
 // console.log(babytchi);
@@ -63,8 +62,11 @@ const $time = $('#time');
 const game = {
     init () {
         const newName = prompt('What would you like to name your Tamagotchi?');
-        newTamagotchi = new Tamagotchi(newName, renderLookup.babytchi);
+        newTamagotchi = new Tamagotchi(newName);
         console.log(newTamagotchi);
+
+        clearInterval(interval);
+        time = 0;
 
         game.timer();
         game.render();
@@ -74,7 +76,7 @@ const game = {
         // }
     },
     timer () {
-        window.setInterval(function () {
+        interval = window.setInterval(function () {
             time += 1;
             $time.text(`Time Elapsed: ${time} seconds`);
 
@@ -106,17 +108,26 @@ const game = {
         }
     },
     feed() {
-        newTamagotchi.hunger -= 2;
+        if (newTamagotchi.hunger >= 2) {
+            newTamagotchi.hunger -= 2;
+        } else {
+            newTamagotchi.hunger = 0;
+        }
+        
     },
     play() {
-        newTamagotchi.boredom -= 2;
+        if (newTamagotchi.boredom >= 3) {
+            newTamagotchi.boredom -= 3;
+        } else {
+            newTamagotchi.boredom = 0;
+        }  
     },
     lights () {
         newTamagotchi.sleepiness = 0;
     },
     displayStats() {
         if ($('#metrics').css('visibility') === 'visible') {
-            
+            $("#metrics").css("visibility", "hidden");
         } else if ($("#metrics").css("visibility") === 'hidden') {
             $("#metrics").css("visibility", "visible");
         }    
