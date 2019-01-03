@@ -68,6 +68,17 @@ ion-icon {
     height: 3rem;
 }
 
+#icons a:link,
+#icons a:visited {
+    opacity: 0.5;
+}
+
+#icons a:hover,
+#icons a:active {
+    cursor: pointer;
+    opacity: 1;
+}
+
 a {
     text-decoration: none;
 }
