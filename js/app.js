@@ -40,15 +40,15 @@ let time = 0; 
 
 
 /*----- cached element references -----*/ 
-const $name = $('#name');
-const $hunger = $('#hunger');
-const $sleepiness = $('#sleepiness');
-const $boredom = $('#boredom');
-const $age = $('#age');
-const $status = $('#status');
-const $food = $('#food');
-const $play = $('#play');
-const $lights = $('#lights');
+const $name = $('.name');
+const $hunger = $('.hunger');
+const $sleepiness = $('.sleepiness');
+const $boredom = $('.boredom');
+const $age = $('.age');
+const $status = $('.status');
+const $food = $('.food');
+const $play = $('.play');
+const $lights = $('.lights');
 const $time = $('#time');
 
 
@@ -81,6 +81,12 @@ const game = {
         }, 1000);
     },
     render() {
+        $name.text(`${newTamagotchi.name}`);
+        $hunger.text(`Hunger: ${newTamagotchi.hunger}/10`);
+        $sleepiness.text(`Sleepiness: ${newTamagotchi.sleepiness}/10`);
+        $boredom.text(`Boredom: ${newTamagotchi.boredom}/10`);
+        $age.text(`Age: ${newTamagotchi.age}`);
+        
         //Change stages/form
         if (newTamagotchi.age === 1) {
             newTamagotchi.stage = "marutchi";
@@ -92,12 +98,6 @@ const game = {
             game.death();
         }
 
-        $name.text(`${newTamagotchi.name}'s Stats`);
-        $hunger.text(`Hunger: ${newTamagotchi.hunger}/10`);
-        $sleepiness.text(`Sleepiness: ${newTamagotchi.sleepiness}/10`);
-        $boredom.text(`Boredom: ${newTamagotchi.boredom}/10`);
-        $age.text(`Age: ${newTamagotchi.age}`);
-
         //checks death
         for (let trait in newTamagotchi.tickChart) {
           if (newTamagotchi[trait] >= 10) {
@@ -105,7 +105,7 @@ const game = {
           }
         }
 
-        $("#tamagotchi-screen").html(`<img src="${renderLookup[newTamagotchi.stage]}" alt="${newTamagotchi.stage} image" title="${newTamagotchi.stage} image">`);
+        $('.tamagotchi-screen').html(`<img src="${renderLookup[newTamagotchi.stage]}" alt="${newTamagotchi.stage} image" title="${newTamagotchi.stage} image">`);
     },
     feed () {
         if (newTamagotchi.hunger >= 2) {
@@ -123,18 +123,21 @@ const game = {
     },
     lights () {
         newTamagotchi.sleepiness = 0;
+        $(".tamagotchi-screen").css("background-image", "linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 60%, var(--background-color1))");
     },
     displayStats () {
-        if ($('#metrics').css('visibility') === 'visible') {
-            $("#metrics").css("visibility", "hidden");
-        } else if ($("#metrics").css("visibility") === 'hidden') {
-            $("#metrics").css("visibility", "visible");
+        if ($('.metrics').css('visibility') === 'visible') {
+            $('.metrics').css('visibility', 'hidden');
+            // $('.tamagotchi-screen img').css('visibility', 'visible');
+        } else if ($(".metrics").css('visibility') === 'hidden') {
+            $('.metrics').css('visibility', 'visible');
+            // $('.tamagotchi-screen img').css('visibility', 'hidden');
         }    
     },
     death () {
         clearInterval(interval);
         newTamagotchi.stage = "dead";
-        $age.text(`YOUR TAMAGOTCHI HAS DIED!`);
+        $age.html('Your Tamagotchi<br>has died!');
     }
 }
 
@@ -144,7 +147,7 @@ const getRandomBetween = function (min, max) {
 
 
 /*----- event listeners -----*/
-$('#start-btn').on('click', game.init);
+$('.start-btn').on('click', game.init);
 
 $status.on('click', game.displayStats);
 $food.on('click', game.feed);
