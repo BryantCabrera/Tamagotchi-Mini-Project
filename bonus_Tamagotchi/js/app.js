@@ -43,7 +43,7 @@ class Tamagotchi {
     }
 
     play() {
-        this.boredom >= 3 && this.stage !== "dead" ? (this.boredom -= 3) : console.log(`${this.name} is not hungry enough yet.`);
+        this.boredom >= 3 && this.stage !== "dead" ? (this.boredom -= 3) : console.log(`${this.name} is not bored enough yet.`);
     }
 
     lights() {

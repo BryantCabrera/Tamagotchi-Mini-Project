@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.ui.js"></script>
     <script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>
     <link rel="stylesheet" href="css/icon-font.css">
+    <link rel="stylesheet" type="text/css" href="vendors/css/ionicons.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>...</title>
 </head>
@@ -17,9 +20,9 @@
         <img src="resources/imgs/Tamagotchi_Logo.png" alt="Tamagotchi Logo" title="Tamagotchi Logo">
         <h1>Bryant Cabrera</h1>
         <ul>
-            <a href="#game">Game</a>
-            <a href="">Instructions</a>
-            <a href="">Contact</a>
+            <a href="#0">Game</a>
+            <a href="#instructions" rel="modal:open">Instructions</a>
+            <a href="#contact">Contact</a>
         </ul>
     </header>
     <main>
@@ -29,6 +32,18 @@
             Time Elapsed: 00:00
         </div>
 
+        <div id="instructions" class="modal">
+            <p>
+                <h4>Welcome to Bryant's Tamagotchi Game</h4><br>
+                Click the "Hatch Egg!" button to start your Tamagotchi and name it.<br>
+                In the upper left, the 1st icon is "Stats". Click it to display your Tamagotchi's stats. As time goes by, your Tamagotchi will get hungrier, sleepier, more bored, and older.  Prevent any stat from getting to 10 or else your Tamagotchi will die! Your Tamagotchi automatically dies at age 4.<br>
+                In the upper left, the 2nd icon is "Feed". Click it to bring your Tamagotchi's hunger down.<br>
+                In the upper left, the 2rd icon is "Play". Click it to bring your Tamagotchi's boredom down.<br>
+                In the upper left, the last icon is "Lights". Click it to turn the lights on/off and bring down your Tamagotchi's sleepiness.<br>
+                To make your original Tamagotchi have a baby, click the "Hatch Egg!" button again and name your baby.  But be careful, because 1 is a handful, any more is a crazy ride!
+            </p>
+            <a href="#" rel="modal:close">Close</a>
+        </div>
         <!-- <section id="0 game" class="tamagotchi-device">
             <div class="tamagotchi-screen lights--on"></div>
 
@@ -55,6 +70,23 @@
         
     </main>
 
+    <footer id="contact">
+        <div class="row">
+            <ul class="footer-nav">
+                <li><a href="www.bryantcabrera.com" target="blank">About Me</a></li>
+                <li><a href="https://www.linkedin.com/in/bryantcabrera/" target="blank">LinkedIn</a></li>
+                <li><a href="https://github.com/BryantCabrera" target="blank">GitHub</a></li>
+            </ul>
+    
+    
+            <ul class="social-links">
+                <li><a href="https://www.facebook.com/bryantcabrera" target="blank"><i class="ion-social-facebook"></i></a></li>
+                <li><a href="https://twitter.com/bryantcabrera" target="blank"><i class="ion-social-twitter"></i></a></li>
+                <li><a href="plus.google.com/+BryantCabrera" target="blank"><i class="ion-social-googleplus"></i></a></li>
+                <li><a href="https://www.instagram.com/bryantcabrera/" target="blank"><i class="ion-social-instagram"></i></a></li>
+            </ul>
+        </div>
+    </footer>
     <script src="js/app.js"></script>
 </body>
 </html>

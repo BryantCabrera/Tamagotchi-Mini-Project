@@ -209,10 +209,71 @@ a .baby {
     grid-template-rows: 2 1fr;
 }
 
-/* .show {
-    visibility: visible;
+
+/*-----Footer-----*/
+footer {
+    padding: 30px;
+    font-size: 80%;
+    background-image: linear-gradient(var(--button-color2), var(--button-color1)), url(../resources/imgs/device_background.jpg);
 }
 
-.hide {
-    visibility: hidden;
-} */
+footer div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-nav li,
+.social-links li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.footer-nav li:last-child,
+.social-links li:last-child {
+    margin-right: 0;
+}
+
+.footer-nav li a:link,
+.footer-nav li a:visited,
+.social-links li a:link,
+.social-links li a:visited {
+    text-decoration: none;
+    border: 0;
+    color: var(--text-color1);
+    transition: color 0.2s;
+    font-size: 1.6rem;
+}
+
+.footer-nav li a:hover,
+.footer-nav li a:active {
+    color: var(--device-color2);
+}
+
+.social-links li a:link,
+.social-links li a:visited {
+    font-size: 2.6rem;
+}
+
+.ion-social-facebook,
+.ion-social-twitter,
+.ion-social-googleplus,
+.ion-social-instagram {
+    transition: color 0.2s;
+}
+
+.ion-social-facebook:hover {
+    color: #3b5998;
+}
+
+.ion-social-twitter:hover {
+    color: #00aced;
+}
+
+.ion-social-googleplus:hover {
+    color: #dd4b39;
+}
+
+.ion-social-instagram:hover {
+    color: #517fa4;
+}
