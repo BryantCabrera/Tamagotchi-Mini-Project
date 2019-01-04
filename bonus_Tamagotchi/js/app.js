@@ -125,8 +125,8 @@ class BabyTamagotchi extends Tamagotchi {
         super(name);
     }
 
-    exercise () {
-        console.log(this);
+    exercise() {
+        console.log('Exercising...');
         //makes the hunger and sleepiness meters take longer to tick up
         this.tickChart.hunger.threshold += 2;
         this.tickChart.sleepiness.threshold += 2;
