@@ -1,5 +1,6 @@
 /*----- cached element references -----*/
 const $time = $('#time');
+const $main = $('main');
 
 
 /*----- constants -----*/ 
@@ -70,7 +71,7 @@ class Tamagotchi {
     }
 
     render() {
-        $("main").append(`<section id="${this.id}" class="tamagotchi-device">
+        $main.append(`<section id="${this.id}" class="tamagotchi-device">
             <div class= "tamagotchi-screen lights--on"></div>
 
             <section class="metrics">
