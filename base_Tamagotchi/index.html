@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.ui.js"></script>
+    <script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>
+    <link rel="stylesheet" href="css/icon-font.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>...</title>
+</head>
+<body>
+    <header>
+        <img src="resources/imgs/Tamagotchi_Logo.png" alt="Tamagotchi Logo" title="Tamagotchi Logo">
+        <h1>Bryant Cabrera</h1>
+        <ul>
+            <a href="#game">Game</a>
+            <a href="">Instructions</a>
+            <a href="">Contact</a>
+        </ul>
+    </header>
+    <main>
+        <div id="time">
+            Time Elapsed: 00:00
+        </div>
+
+        <section id="game" class="tamagotchi-device">
+            <div class="tamagotchi-screen lights--on"></div>
+
+            <section class="metrics">
+                <div class="hunger"></div>
+                <div class="sleepiness"></div>
+                <div class="boredom"></div>
+                <div class="age"></div>
+            </section>
+
+            <div class="icons">
+                <a href="#" alt="Show/Hide Status" title="Show/Hide Status"><ion-icon name="speedometer" class="status"></ion-icon></a>
+                <a href="#" alt="Feed" title="Feed"><ion-icon name="pizza" class="food"></ion-icon></a>
+                <a href="#" alt="Play" title="Play"><ion-icon name="logo-game-controller-b" class="play"></ion-icon></a>
+                <a href="#" alt="Toggle Lights" title="Toggle Lights"><ion-icon name="bulb" class="lights"></ion-icon></a>
+            </div>
+
+            <div class="start">
+                <h3 class="name"></h3>
+                <a href="#" class="start-btn">Hatch Egg!</a>
+            </div>
+        </section>
+
+        
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
