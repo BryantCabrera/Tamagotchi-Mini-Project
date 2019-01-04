@@ -113,6 +113,14 @@ main {
 .icons {
     position: absolute;
     top: 20%;
+
+    /* display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas: "status food play lights"
+                         ".      .    .    empty"
+                         ".      .    .    empty"
+                         ".      .    .    baby"; */
 }
 
 ion-icon {
@@ -136,6 +144,26 @@ a {
     text-decoration: none;
 }
 
+/* a .status {
+    grid-area: status;
+}
+
+a .food {
+    grid-area: food;
+}
+
+a .play {
+    grid-area: play;
+}
+
+a .lights {
+    grid-area: lights;
+}
+
+a .baby {
+    grid-area: baby;
+} */
+
 .start {
     display: flex;
     justify-content: center;
@@ -153,7 +181,7 @@ a {
 
 .start-btn {
     position: absolute;
-    bottom: 5%;
+    top: 5%;
     border: .2rem solid rgba(0, 0, 0);
     border-radius: .3rem;
     padding: .5rem;
