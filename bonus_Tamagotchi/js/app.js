@@ -39,11 +39,11 @@ class Tamagotchi {
     }
 
     feed() {
-        (this.hunger >= 2 && this.stage !== "dead") ? this.hunger -= 2 : this.hunger = 0;
+        (this.hunger >= 2 && this.stage !== "dead") ? this.hunger -= 2 : console.log(`${this.name} is not hungry enough yet.`);
     }
 
     play() {
-        (this.boredom >= 3 && this.stage !== "dead") ? this.boredom -= 3 : this.boredom = 0;
+        this.boredom >= 3 && this.stage !== "dead" ? (this.boredom -= 3) : console.log(`${this.name} is not hungry enough yet.`);
     }
 
     lights() {
@@ -126,6 +126,7 @@ class BabyTamagotchi extends Tamagotchi {
     }
 
     exercise () {
+        console.log(this);
         //makes the hunger and sleepiness meters take longer to tick up
         this.tickChart.hunger.threshold += 2;
         this.tickChart.sleepiness.threshold += 2;
