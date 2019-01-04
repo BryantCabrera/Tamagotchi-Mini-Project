@@ -91,7 +91,6 @@ main {
     height: 14rem;
     width: 14rem;
     border-radius: .4rem;
-    background-image: linear-gradient(to bottom, var(--background-color3) 60%, var(--background-color1));
     box-shadow: inset 0 1rem 2rem rgba(0, 0, 0, .5);
 }
 
@@ -101,6 +100,14 @@ main {
     height: 6rem;
     width: auto;
     opacity: .6;
+}
+
+.lights--on {
+    background-image: linear-gradient(to bottom, var(--background-color3) 60%, var(--background-color1));
+}
+
+.lights--off {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 60%, var(--background-color1))
 }
 
 .icons {

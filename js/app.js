@@ -123,7 +123,9 @@ const game = {
     },
     lights () {
         newTamagotchi.sleepiness = 0;
-        $(".tamagotchi-screen").css("background-image", "linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 60%, var(--background-color1))");
+
+        $('.tamagotchi-screen').toggleClass('lights--on');
+        $('.tamagotchi-screen').toggleClass('lights--off');
     },
     displayStats () {
         if ($('.metrics').css('visibility') === 'visible') {
