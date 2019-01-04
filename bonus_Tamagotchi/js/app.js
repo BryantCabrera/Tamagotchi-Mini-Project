@@ -1,16 +1,18 @@
 /*----- cached element references -----*/
-const $name = $('.name');
-const $hunger = $('.hunger');
-const $sleepiness = $('.sleepiness');
-const $boredom = $('.boredom');
-const $age = $('.age');
-const $status = $('.status');
-const $food = $('.food');
-const $play = $('.play');
-const $lights = $('.lights');
 const $time = $('#time');
 
+
 /*----- constants -----*/ 
+let newTamagotchi, interval;
+
+const renderLookup = {
+    'babytchi': 'resources/imgs/babytchi.gif',
+    'marutchi': 'resources/imgs/marutchi.gif',
+    'tamatchi': 'resources/imgs/tamatchi.gif',
+    'mametchi': 'resources/imgs/mametchi.gif',
+    'dead': 'resources/imgs/dead3.png'
+};
+
 class Tamagotchi {
     constructor(name) {
         this.name = name;
@@ -37,19 +39,11 @@ class Tamagotchi {
     }
 
     feed() {
-        if (this.hunger >= 2) {
-            this.hunger -= 2;
-        } else {
-            this.hunger = 0;
-        }
+        (this.hunger >= 2 && this.stage !== "dead") ? this.hunger -= 2 : this.hunger = 0;
     }
 
     play() {
-        if (this.boredom >= 3) {
-            this.boredom -= 3;
-        } else {
-            this.boredom = 0;
-        }
+        (this.boredom >= 3 && this.stage !== "dead") ? this.boredom -= 3 : this.boredom = 0;
     }
 
     lights() {
@@ -62,17 +56,17 @@ class Tamagotchi {
     displayStats() {
         if ($(`#${this.id} .metrics`).css("visibility") === "visible") {
             $(`#${this.id} .metrics`).css("visibility", "hidden");
-          // $('.tamagotchi-screen img').css('visibility', 'visible');
+            $(`#${this.id} .tamagotchi-screen img`).css("opacity", ".6");
         } else if ($(`#${this.id} .metrics`).css("visibility") === "hidden") {
             $(`#${this.id} .metrics`).css("visibility", "visible");
-          // $('.tamagotchi-screen img').css('visibility', 'hidden');
+            $(`#${this.id} .tamagotchi-screen img`).css("opacity", ".2");
         }
     }
 
     death() {
-        clearInterval(interval);
+        // clearInterval(interval);
         this.stage = "dead";
-        $age.html('Your Tamagotchi<br>has died!');
+        $(`#${this.id} .metrics .age`).html('Your Tamagotchi<br>has died!');
     }
 
     render() {
@@ -99,18 +93,44 @@ class Tamagotchi {
             </div>
         </section >`);
     }
+
+    baby () {
+        const newName = prompt("Your tamagotchi just had a baby! What would you like to name it?");
+        newTamagotchi = new BabyTamagotchi(newName);
+        newTamagotchi.id = game.tamagotchies.length;
+        newTamagotchi.render();
+
+        game.tamagotchies.push(newTamagotchi);
+        console.log(newTamagotchi);
+
+        //establishes new event listeners when a new tamagotchi is instantiated
+        for (let i = 0; i < game.tamagotchies.length; i++) {
+          $(`#${i} .icons`).off();
+          $(`#${i} .icons`).on("click", function(e) {
+            let id = parseInt($(e.target).attr("data-id"));
+            let action = $(e.target).attr("data-action");
+
+            game.tamagotchies[id][action]();
+          });
+        }
+
+        //resets interval and starts it again
+        clearInterval(interval);
+        game.timer();
+    }
 }
 
-const renderLookup = {
-    'babytchi': 'resources/imgs/babytchi.gif',
-    'marutchi': 'resources/imgs/marutchi.gif',
-    'tamatchi': 'resources/imgs/tamatchi.gif',
-    'mametchi': 'resources/imgs/mametchi.gif',
-    'dead': 'resources/imgs/dead3.png'
-};
+class BabyTamagotchi extends Tamagotchi {
+    constructor(name) {
+        super(name);
+    }
 
-let newTamagotchi, interval;
-
+    exercise () {
+        //makes the hunger and sleepiness meters take longer to tick up
+        this.tickChart.hunger.threshold += 2;
+        this.tickChart.sleepiness.threshold += 2;
+    }
+}
 
 /*----- app's state (variables) -----*/
 let time = 0; 
@@ -120,47 +140,31 @@ let time = 0; 
 const game = {
     tamagotchies: [],
     init () {
+        //creates new Tamagotchi data
         const newName = prompt('What would you like to name your Tamagotchi?');
         newTamagotchi = new Tamagotchi(newName);
         newTamagotchi.id = game.tamagotchies.length;
+        //creates new Tamagotchi DOM element
         newTamagotchi.render();
-
-        // //create Event Listeners
-        // //status button even listener
-        // $(`${game.tamagotchies.length} .icons .status`).on('click', game.displayStats);
-        // //food button even listener
-        // $(`${game.tamagotchies.length} .icons .food}`).on('click', game.feed);
-        // //play button even listener
-        // $(`${game.tamagotchies.length} .icons .play}`).on('click', game.play);
-        // //lights button even listener
-        // $(`${game.tamagotchies.length} .icons .lights}`).on('click', game.lights);
-
-        // createOneTimeListener($(`${game.tamagotchies.length} .icons .status`), "click", listener);
-        // createOneTimeListener($(`${game.tamagotchies.length} .icons .food}`), "click", listener);
-        // createOneTimeListener($(`${game.tamagotchies.length} .icons .play`), "click", listener);
-        // createOneTimeListener($(`${game.tamagotchies.length} .icons .lights`), "click", listener);
 
         game.tamagotchies.push(newTamagotchi);
         console.log(newTamagotchi);
 
+        //establishes new event listeners when a new tamagotchi is instantiated
         for (let i = 0; i < game.tamagotchies.length; i++) {
             $(`#${i} .icons`).off();
             $(`#${i} .icons`).on("click", function (e) {
-                console.log(e.target);
                 let id = parseInt($(e.target).attr("data-id"));
                 let action = $(e.target).attr("data-action");
 
-                console.log(id);
-                console.log(action);
                 game.tamagotchies[id][action]();
             });
         }
         
-
+        //resets time interval then restarts it
         clearInterval(interval);
-        time = 0;
-
         game.timer();
+
         game.render();
     },
     timer () {
@@ -168,9 +172,10 @@ const game = {
             time += 1;
             $time.text(`Time Elapsed: ${time} seconds`);
 
+            //for every tamagotchi in existence, updates their metrics
             for (let i = 0; i < game.tamagotchies.length; i++) {
                 for (let trait in game.tamagotchies[i].tickChart) {
-                    if (time % game.tamagotchies[i].tickChart[trait]['threshold'] === 0) {
+                    if (time % game.tamagotchies[i].tickChart[trait]['threshold'] === 0 && game.tamagotchies[i].stage !== 'dead') {
                         // newTamagotchi[trait][curCount] += 1;
                         game.tamagotchies[i][trait] += 1;
                     }
@@ -180,6 +185,7 @@ const game = {
         }, 1000);
     },
     render() {
+        //for every Tamagotchi in existence, updates the DOM with their stats
         for (let i = 0; i < game.tamagotchies.length; i++) {
             $(`#${i} .start .name`).text(`${game.tamagotchies[i].name}`);
             $(`#${i} .metrics .hunger`).text(`Hunger: ${game.tamagotchies[i].hunger}/10`);
@@ -205,28 +211,21 @@ const game = {
                 }
             }
 
+            //updates sprite displayed on the DOM
             $(`#${i} .tamagotchi-screen`).html(`<img src="${renderLookup[game.tamagotchies[i].stage]}" alt="${game.tamagotchies[i].stage} image" title="${game.tamagotchies[i].stage} image">`);
         }
     },
 }
 
+//calculates a number for the threshold of the "personality" traits in Tamagotchi.tickChart
 const getRandomBetween = function (min, max) {
     return Math.floor(Math.random() * (max - min) + min)
 };
 
 
 /*----- event listeners -----*/
-$('.start-btn').on('click', game.init);
-
-
-
-
-// function createOneTimeListener(element, event, listener) {
-//     // first we call addEventListener on element with event name
-//     // then inside the callback function, we first un-register the listener
-//     // and return the original listener passed to attach it with the event
-//     element.on(event, function () {
-//         element.off(event, arguments.callee);
-//         return listener();
-//     });
-// }
+$('.start-btn').on('click', function () {
+    //if 1st time clicking, makes new Tamagotchi, otherwise calls .baby() on original Tamagotchi to make new super-powered Tamagotchi
+    time === 0 ? game.init() : (game.tamagotchies[0].stage !== 'dead' ? game.tamagotchies[0].baby() : console.log('Sorry, your tamagotchi is dead and can no longer reproduce.'));
+    
+});
